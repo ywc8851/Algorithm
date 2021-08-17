@@ -15,9 +15,11 @@ bool possible = false;
 
 bool possible_ans(int x){
     for (int i = 1; i <= N; i++){
-        if (ans[i] == true)
+        if (ans[i] == true) // 현재까지 친구관계로 뽑힌 i들
         {
-            if (is_friend[x][i] == false) return false;
+            if (is_friend[x][i] == false) {
+                return false;  // 친구관계가 성립하려면 모든친구가 친구관계여야함
+            } 
         }
     }
     return true;
@@ -38,12 +40,12 @@ void backtracking(int Cur, int Cnt){
         if (is_friend[Cur][i] == false){ // i와 친구관계가 아님
 			continue;
 		} 
-        if (possible_ans(i) == false){
+        if (possible_ans(i) == false){ // 현재까지 뽑힌 친구들과 모두 친구관계가 아닌경우
 			continue;
 		} 
-        ans[i] = true;
-        backtracking(i, Cnt + 1);   
-        ans[i] = false;
+        ans[i] = true; // i를 친구관계에 포함
+        backtracking(i, Cnt + 1);   // 백트래킹 진행
+        ans[i] = false; // i를 친구관계에서 제외
     }
 }
 int main() { 
